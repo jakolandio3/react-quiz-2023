@@ -1,15 +1,14 @@
 import React from 'react';
-import { useQuiz } from '../context/QuizContext';
+import Question from './Question';
 
-export default function Options() {
-	const { curQuestion, dispatch, answer } = useQuiz();
-	const { options, correctOption } = curQuestion;
-	const hasAnswered = answer !== null;
+export default function Options({ curQuestion, dispatch, curAnswer }) {
+	const { options, correctOption, points } = curQuestion;
+	const hasAnswered = curAnswer !== null;
 	return (
 		<div className='options'>
 			{options.map((option, i) => (
 				<button
-					className={`btn btn-option ${i === answer ? 'answer' : ''} ${
+					className={`btn btn-option ${i === curAnswer ? 'answer' : ''} ${
 						hasAnswered ? (i === correctOption ? 'correct' : 'wrong') : ''
 					}`}
 					key={option}
