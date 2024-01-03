@@ -78,21 +78,20 @@ function QuizProvider({ children }) {
 	const curQuestion = questions[index];
 
 	const numQuestions = questions.length;
-	useEffect(
-		() =>
-			async function () {
-				try {
-					const res = await fetch(
-						'https://api-for-react-quiz.onrender.com/api/questions'
-					);
-					const data = await res.json();
-					dispatch({ type: 'dataReceived', payLoad: data });
-				} catch (error) {
-					dispatch({ type: 'dataFailed' });
-				}
-			},
-		[]
-	);
+	useEffect(() => {
+		async function fetchQuestions() {
+			try {
+				const res = await fetch(
+					'https://api-for-react-quiz.onrender.com/api/questions'
+				);
+				const data = await res.json();
+				dispatch({ type: 'dataReceived', payLoad: data });
+			} catch (error) {
+				dispatch({ type: 'dataFailed' });
+			}
+		}
+		fetchQuestions();
+	}, []);
 
 	return (
 		<QuizContext.Provider
