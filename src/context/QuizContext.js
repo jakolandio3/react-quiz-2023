@@ -82,7 +82,9 @@ function QuizProvider({ children }) {
 		() =>
 			async function () {
 				try {
-					const res = await fetch('http://localhost:8000/questions');
+					const res = await fetch(
+						'https://api-for-react-quiz.onrender.com/api/questions'
+					);
 					const data = await res.json();
 					dispatch({ type: 'dataReceived', payLoad: data });
 				} catch (error) {
