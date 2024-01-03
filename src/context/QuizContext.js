@@ -19,7 +19,7 @@ function reducer(state, action) {
 	const question = state.questions.at(state.index);
 	switch (action.type) {
 		default:
-			throw new Error('action is unknowen');
+			throw new Error('action is unknown');
 		case 'dataReceived':
 			return { ...state, questions: action.payLoad, status: 'ready' };
 		case 'dataFailed':
