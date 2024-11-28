@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import { useEffect, useReducer } from 'react';
 
 const QuizContext = createContext();
-
+const DATABASE = import.meta.env.VITE_DATABASE_URL;
 const SECS_PER_QUESTION = 30;
 const initialState = {
 	questions: [],
@@ -81,9 +81,7 @@ function QuizProvider({ children }) {
 	useEffect(() => {
 		async function fetchQuestions() {
 			try {
-				const res = await fetch(
-					'https://api-for-react-quiz.onrender.com/api/questions'
-				);
+				const res = await fetch(DATABASE);
 				const data = await res.json();
 				dispatch({ type: 'dataReceived', payLoad: data });
 			} catch (error) {
